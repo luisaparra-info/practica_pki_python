@@ -9,14 +9,14 @@ cd $HOME
 git clone <URL_DEL_REPOSITORIO_CLASSROOM> practica-pki-python
 cd practica-pki-python
 
-2. Crear y activar entorno virtual
+## 2. Crear y activar entorno virtual
 python3 -m venv venv
 source venv/bin/activate
 
-3. Instalar dependencias
+## 3. Instalar dependencias
 pip install -r requirements.txt
 
-4. Generar la PKI en $HOME/pki
+## 4. Generar la PKI en $HOME/pki
 
 Sigue el enunciado de la práctica para:
 
@@ -26,7 +26,7 @@ Crear el certificado de servidor en $HOME/pki/servidor
 
 Crear certificados de cliente en $HOME/pki/clientes
 
-5. Configurar Nginx
+## 5. Configurar Nginx
 
 Copiar la plantilla:
 
@@ -47,13 +47,13 @@ sudo ln -s /etc/nginx/sites-available/practicapki /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 
-6. Ejecutar la aplicación Flask
+## 6. Ejecutar la aplicación Flask
 
 Desde la carpeta del repo, con el entorno virtual activo:
 
 python3 app.py
 
-7. Acceso a la web
+## 7. Acceso a la web
 
 Importa tu certificado de cliente (.p12) en el navegador.
 
