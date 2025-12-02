@@ -25,7 +25,7 @@ app = Flask(__name__)
 
 # Ruta del fichero de log de accesos.
 # Se usará para ir guardando cada acceso con fecha, nombre, email e IP.
-LOG_FILE = "/var/log/user_access.log"
+LOG_FILE = "user_access.log"
 
 
 def parse_dn(dn: str):
@@ -74,10 +74,15 @@ def index():
     # - SSL_CLIENT_VERIFY:  "SUCCESS" si el certificado es válido.
     subject_dn = request.headers.get("SSL_CLIENT_SUBJECT", "")
     verify = request.headers.get("SSL_CLIENT_VERIFY", "NONE")
+    tabla="<table>"
+    for k, v in request.environ.items():
+        tabla += f"<tr><td>{k}</td><td>{v}</td></tr>"
+    tabla += "</table>"
+    
 
     # Si la verificación no fue exitosa, no dejamos pasar al usuario.
     if verify != "SUCCESS":
-        return "Certificado de cliente no válido o no presentado.", 403
+        return f"""Certificado de cliente no válido o no presentado.{verify} {subject_dn}{tabla}""", 403
 
     # Obtenemos nombre y email a partir del subject.
     nombre, email = parse_dn(subject_dn)
